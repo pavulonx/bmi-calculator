@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="description_text_size">20sp</dimen>
+    <dimen name="result_bmi_text_size">50sp</dimen>
+    <dimen name="user_bmi_label_text_size">35sp</dimen>
+    <dimen name="description_text_margin">10dp</dimen>
+    <dimen name="result_text_margin">15dp</dimen>
+    <dimen name="user_bmi_label_margin">20dp</dimen>
+    <dimen name="input_lines_horizontal_margins">20dp</dimen>
+    <dimen name="unit_text_size">20sp</dimen>
+    <dimen name="button_padding">20dp</dimen>
+    <dimen name="button_margin">20dp</dimen>
+</resources>

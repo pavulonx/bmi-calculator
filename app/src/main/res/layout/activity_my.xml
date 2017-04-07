@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        tools:context="pl.rozen.swim.BMICalculator.activities.MyActivity">
+
+        <!-- radio buttons -->
+
+        <RadioGroup
+            android:id="@+id/units_RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/metric_units_RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:text="@string/metric_units_rb_label" />
+
+            <RadioButton
+                android:id="@+id/imperial_units_RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/imperial_units_rb_label" />
+        </RadioGroup>
+
+        <!-- first line -->
+
+
+        <EditText
+            android:id="@+id/height_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/units_RadioGroup"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/input_lines_horizontal_margins"
+            android:ems="4"
+            android:hint="@string/height_hint"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/height_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/units_RadioGroup"
+            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toStartOf="@id/height_EditText"
+            android:paddingBottom="@dimen/input_lines_horizontal_margins"
+            android:text="@string/user_height_label"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/height_unit_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/units_RadioGroup"
+            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/height_EditText"
+            android:paddingBottom="@dimen/input_lines_horizontal_margins"
+            android:text="@string/height_metric_unit"
+            android:textSize="@dimen/unit_text_size" />
+
+        <!--second line-->
+
+
+        <EditText
+            android:id="@+id/mass_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/height_label"
+            android:layout_centerHorizontal="true"
+            android:ems="4"
+            android:hint="@string/mass_hint"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/mass_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/height_label"
+            android:layout_margin="10dp"
+            android:layout_marginTop="@dimen/input_lines_horizontal_margins"
+            android:layout_toStartOf="@id/mass_EditText"
+            android:text="@string/user_mass_label"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mass_unit_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/height_label"
+            android:layout_margin="10dp"
+            android:layout_marginTop="@dimen/input_lines_horizontal_margins"
+            android:layout_toEndOf="@id/mass_EditText"
+            android:text="@string/mass_metric_unit"
+            android:textSize="@dimen/unit_text_size" />
+
+        <!-- button -->
+
+        <Button
+            android:id="@+id/calc_bmi_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mass_label"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/calculate_bmi_button" />
+
+        <!-- result text view-->
+
+        <TextView
+            android:id="@+id/user_bmi_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calc_bmi_Button"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/user_bmi_label_margin"
+            android:text="@string/user_bmi_label"
+            android:textSize="@dimen/user_bmi_label_text_size"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/result_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_bmi_label"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/result_text_margin"
+            android:textSize="@dimen/result_bmi_text_size"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/general_description_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/result_TextView"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/description_text_margin"
+            android:textSize="@dimen/description_text_size"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/detailed_description_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/general_description_TextView"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/description_text_margin"
+            android:textAlignment="center"
+            android:textSize="@dimen/description_text_size"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</ScrollView>
+
+
+    <!--<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical"--><!--tools:context="pl.rozen.swim.lab1.MyActivity">-->
+
+
+    <!--<RadioGroup--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">-->
+
+    <!--<RadioButton--><!--android:id="@+id/radioButtonMetricUnits"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:checked="true"--><!--android:text="Metric units" />-->
+
+    <!--<RadioButton--><!--android:id="@+id/radioButtonImperialUnits"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Imperial units" />--><!--</RadioGroup>-->
+
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+    <!--<TextView--><!--android:id="@+id/tvHeight"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Type your height: "--><!--android:textSize="20sp"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--<EditText--><!--android:id="@+id/editTextHeight"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:inputType="numberDecimal"--><!--android:hint="Height"--><!--android:maxLength="4"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />--><!--</LinearLayout>-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+    <!--<TextView--><!--android:id="@+id/tvMass"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Type your mass:  "--><!--android:textSize="20sp"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--<EditText--><!--android:id="@+id/editTextMass"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:inputType="numberDecimal"--><!--android:hint="Mass  "--><!--android:maxLength="4"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />--><!--</LinearLayout>-->
+
+    <!--<Button--><!--android:id="@+id/buttonCalcBMI"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="center"--><!--android:text="Calculate BMI"--><!--android:onClick="onClickCalculateBMI"/>-->
+
+    <!--<TextView--><!--android:id="@+id/result"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textSize="20sp"--><!--android:layout_gravity="center"--><!--android:layout_margin="20dp"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--</android.support.v7.widget.LinearLayoutCompat>-->
+
+    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context="pl.rozen.msid.lab1.MyActivity">-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Hello World!"--><!--app:layout_constraintBottom_toBottomOf="parent"--><!--app:layout_constraintLeft_toLeftOf="parent"--><!--app:layout_constraintRight_toRightOf="parent"--><!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">BMI Calculator</string>
+
+    <string name="mass_metric_unit">kg</string>
+    <string name="height_metric_unit">cm</string>
+    <string name="mass_imperial_unit">st</string>
+    <string name="height_imperial_unit">in</string>
+
+    <string name="wrong_height_err">Wrong height</string>
+    <string name="wrong_mass_err">Wrong mass</string>
+
+    <string name="metric_units_rb_label">Metric units</string>
+    <string name="imperial_units_rb_label">Imperial units</string>
+
+    <string name="user_height_label">Your height:</string>
+    <string name="user_mass_label">Your mass:</string>
+    <string name="height_hint">height</string>
+    <string name="mass_hint">mass</string>
+
+    <string name="calculate_bmi_button">Calculate BMI</string>
+
+    <string name="user_bmi_label">Your BMI is:</string>
+
+    <string name="underweight_bmi_general_description">You are underweight!</string>
+    <string name="normal_bmi_general_description">You are in normal weight.</string>
+    <string name="overweight_bmi_general_description">You are overweight!</string>
+    <string name="obese_bmi_general_description">You are obese!</string>
+
+    <string name="underweight_bmi_detailed_description">Risk of developing problems such as nutritional deficiency and osteoporosis.</string>
+    <string name="normal_bmi_detailed_description">Low Risk (healthy range)</string>
+    <string name="overweight_bmi_detailed_description">Moderate risk of developing heart disease, high blood pressure, stroke, diabetes.</string>
+    <string name="obese_bmi_detailed_description">High risk of developing heart disease, high blood pressure, stroke, diabetes.</string>
+</resources>
