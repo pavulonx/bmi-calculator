@@ -12,9 +12,17 @@
         android:scrollbars="vertical"
         tools:context="pl.rozen.swim.BMICalculator.activities.MyActivity">
 
+
+        <!-- toolbar -->
+
+        <include
+            android:id="@+id/toolbar_bmi"
+            layout="@layout/toolbar_bmi" />
+
         <!-- radio buttons -->
 
         <RadioGroup
+            android:layout_below="@id/toolbar_bmi"
             android:id="@+id/units_RadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

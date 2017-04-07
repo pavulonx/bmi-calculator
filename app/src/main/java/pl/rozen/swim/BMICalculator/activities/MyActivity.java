@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -21,8 +23,8 @@ import pl.rozen.swim.BMICalculator.R;
 
 public class MyActivity extends AppCompatActivity {
 
-//    @BindView(R.id.bmi_toolbar)
-//    Toolbar toolbar;
+    @BindView(R.id.toolbar_bmi)
+    Toolbar toolbar;
 
     @BindView(R.id.units_RadioGroup)
     RadioGroup unitsRadioGroup;
@@ -67,7 +69,14 @@ public class MyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         restoreSavedInstanceState(savedInstanceState);
         locale = getResources().getConfiguration().getLocales().get(0);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu_bmi);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_bmi,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
