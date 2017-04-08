@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bmi_menu_item_share"
+        app:showAsAction="ifRoom"
+        android:title="@string/about_menu_item_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:actionProviderClass="android.widget.ShareActionProvider"        />
 
 </menu>

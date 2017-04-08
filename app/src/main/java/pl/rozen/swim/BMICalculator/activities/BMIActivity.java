@@ -1,11 +1,15 @@
 package pl.rozen.swim.BMICalculator.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PersistableBundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -21,7 +25,7 @@ import pl.rozen.swim.BMICalculator.utils.CountBMIForMetrics;
 import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
 import pl.rozen.swim.BMICalculator.R;
 
-public class MyActivity extends AppCompatActivity {
+public class BMIActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_bmi)
     Toolbar toolbar;
@@ -48,6 +52,9 @@ public class MyActivity extends AppCompatActivity {
     @BindView(R.id.detailed_description_TextView)
     TextView detailedDescriptionTextView;
 
+    Menu menu;
+
+    private ShareActionProvider shareActionProvider;
 
     private Locale locale;
 
@@ -60,23 +67,75 @@ public class MyActivity extends AppCompatActivity {
     private static final String PERSIST_STATE_FLAG = "persistStateFlag";
 
     private static final int DEFAULT_WRONG_RB_ID = -192837912;
+    private Intent shareIntent;
+
+    private boolean restore = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.activity_bmi);
         ButterKnife.bind(this);
         restoreSavedInstanceState(savedInstanceState);
         locale = getResources().getConfiguration().getLocales().get(0);
         setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.menu_bmi);
+//        toolbar.inflateMenu(R.menu.menu_bmi);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_bmi,menu);
-        return super.onCreateOptionsMenu(menu);
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.menu_bmi, menu);
+        MenuItem share = menu.findItem(R.id.bmi_menu_item_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(share);
+
+        shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SHARE SUBJECT");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "");
+//        MenuItem item = menu.getItem(R.id.bmi_menu_item_save);
+//        item.setChecked(true);
+//        menu.getItem(R.id.bmi_menu_item_save).setChecked(restore);  //TODO: po restorze menuiemm save ma miec taki sam stan jak przed
+        //todo
+        setShareIntent(shareIntent);
+        return true;
+    }
+
+    private void setShareIntent(Intent shareIntent){
+        if (shareActionProvider != null){
+            shareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //TODO
+        switch (item.getItemId()){
+            case R.id.bmi_menu_item_share:
+                if (isResultVisible()){
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "my bmi is blablabla");
+                }
+                else {
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "uzywam zajebistej apki blablabla");
+                }
+                return true;
+            case R.id.bmi_menu_item_save:
+                if (item.isChecked()){
+                    item.setChecked(false);
+                    restore = false;
+                } else {
+                    item.setChecked(true);
+                    restore = true;
+
+                }
+                return true;
+            case R.id.bmi_menu_item_about:
+                Intent startAbout = new Intent(this, AboutActivity.class);
+                startActivity(startAbout);
+                return  true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -120,12 +179,12 @@ public class MyActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
         restoreState();
     }
+
 
     @Override
     protected void onRestart() {
@@ -144,7 +203,6 @@ public class MyActivity extends AppCompatActivity {
         super.onDestroy();
         persistState();
     }
-
 
     private void restoreUI(String heightInput, String massInput, int checkedRadioButtonID) {
         if (checkedRadioButtonID != DEFAULT_WRONG_RB_ID) {
@@ -165,9 +223,10 @@ public class MyActivity extends AppCompatActivity {
             massEditText.setText(massInput);
     }
 
+
     private void restoreState() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean restore = preferences.getBoolean(PERSIST_STATE_FLAG, false);
+        boolean restore = preferences.getBoolean(PERSIST_STATE_FLAG, false); ///TODO: restorecheckboz sie jebie
         if (restore) {
             String heightInput = preferences.getString(HEIGHT_INPUT, null);
             String massInput = preferences.getString(MASS_INPUT, null);
@@ -176,15 +235,19 @@ public class MyActivity extends AppCompatActivity {
         }
     }
 
-
     private void persistState() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         //TODO: check whether prsist flag is checked
+        editor.putBoolean(PERSIST_STATE_FLAG, isSavedCheckBoxChecked());
         editor.putInt(ACTIVE_RADIO_BUTTON, unitsRadioGroup.getCheckedRadioButtonId());
         editor.putString(HEIGHT_INPUT, String.valueOf(heightEditText.getText()));
         editor.putString(MASS_INPUT, String.valueOf(massEditText.getText()));
         editor.apply();
+    }
+
+    private boolean isSavedCheckBoxChecked() {
+        return restore;
     }
 
 
@@ -237,6 +300,7 @@ public class MyActivity extends AppCompatActivity {
             setResultInvisible();
         }
     }
+
 
     private void displayResultBMI(float result) {
 
@@ -300,6 +364,10 @@ public class MyActivity extends AppCompatActivity {
 
     private boolean isMetricUnitsChecked() {
         return unitsRadioGroup.getCheckedRadioButtonId() == R.id.metric_units_RadioButton;
+    }
+
+    private boolean isResultVisible() {
+        return resultTextView.getVisibility() == View.VISIBLE;
     }
 
     private void warnWrongMass() {

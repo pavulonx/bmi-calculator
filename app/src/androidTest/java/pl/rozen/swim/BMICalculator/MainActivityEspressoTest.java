@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import java.util.Locale;
 import java.util.Random;
 
-import pl.rozen.swim.BMICalculator.activities.MyActivity;
+import pl.rozen.swim.BMICalculator.activities.BMIActivity;
 import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForImperials;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForMetrics;
@@ -32,8 +32,8 @@ public class MainActivityEspressoTest {
 
 
     @Rule
-    public ActivityTestRule<MyActivity> mActivityRule =
-            new ActivityTestRule<>(MyActivity.class);
+    public ActivityTestRule<BMIActivity> mActivityRule =
+            new ActivityTestRule<>(BMIActivity.class);
 
     @Test
     public void unitsChangesProperly(){
