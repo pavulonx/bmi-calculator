@@ -52,25 +52,22 @@ public class BMIActivity extends AppCompatActivity {
     @BindView(R.id.detailed_description_TextView)
     TextView detailedDescriptionTextView;
 
-    Menu menu;
-
-    private ShareActionProvider shareActionProvider;
-
-    private Locale locale;
-
     private static final String ACTIVE_RADIO_BUTTON = "activeRadioButton";
     private static final String HEIGHT_INPUT = "heightInputtedText";
     private static final String MASS_INPUT = "massInputtedText";
-
     private static final String RESULT_BMI = "bmiResult";
-
     private static final String PERSIST_STATE_FLAG = "persistStateFlag";
 
-    private static final int DEFAULT_WRONG_RB_ID = -192837912;
+    private static final int DEFAULT_WRONG_RB_ID = -1;
+
+    private ShareActionProvider shareActionProvider;
     private Intent shareIntent;
+
+    Menu menu;
 
     private boolean restore = false;
 
+    private Locale locale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,33 +91,22 @@ public class BMIActivity extends AppCompatActivity {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SHARE SUBJECT");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "");
-//        MenuItem item = menu.getItem(R.id.bmi_menu_item_save);
-//        item.setChecked(true);
-//        menu.getItem(R.id.bmi_menu_item_save).setChecked(restore);  //TODO: po restorze menuiemm save ma miec taki sam stan jak przed
-        //todo
+
         setShareIntent(shareIntent);
         return true;
     }
 
-    private void setShareIntent(Intent shareIntent){
-        if (shareActionProvider != null){
+    private void setShareIntent(Intent shareIntent) {
+        if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(shareIntent);
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //TODO
-        switch (item.getItemId()){
-            case R.id.bmi_menu_item_share:
-                if (isResultVisible()){
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "my bmi is blablabla");
-                }
-                else {
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, "uzywam zajebistej apki blablabla");
-                }
-                return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.bmi_menu_item_save:
-                if (item.isChecked()){
+                if (item.isChecked()) {
                     item.setChecked(false);
                     restore = false;
                 } else {
@@ -129,10 +115,21 @@ public class BMIActivity extends AppCompatActivity {
 
                 }
                 return true;
+            case R.id.bmi_menu_item_share:
+                if (isResultVisible()) {
+                    CharSequence description = generalDescriptionTextView.getText();
+                    description = description.subSequence(8, description.length());
+                    String content = getString(R.string.share_content, resultTextView.getText().toString(),
+                            description);
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+                } else {
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_application_info));
+                }
+                return true;
             case R.id.bmi_menu_item_about:
-                Intent startAbout = new Intent(this, AboutActivity.class);
+                Intent startAbout = new Intent(this, AboutScrollingActivity.class); //TODO
                 startActivity(startAbout);
-                return  true;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -226,7 +223,7 @@ public class BMIActivity extends AppCompatActivity {
 
     private void restoreState() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean restore = preferences.getBoolean(PERSIST_STATE_FLAG, false); ///TODO: restorecheckboz sie jebie
+        boolean restore = preferences.getBoolean(PERSIST_STATE_FLAG, false);
         if (restore) {
             String heightInput = preferences.getString(HEIGHT_INPUT, null);
             String massInput = preferences.getString(MASS_INPUT, null);
@@ -238,16 +235,11 @@ public class BMIActivity extends AppCompatActivity {
     private void persistState() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        //TODO: check whether prsist flag is checked
-        editor.putBoolean(PERSIST_STATE_FLAG, isSavedCheckBoxChecked());
+        editor.putBoolean(PERSIST_STATE_FLAG, restore);
         editor.putInt(ACTIVE_RADIO_BUTTON, unitsRadioGroup.getCheckedRadioButtonId());
         editor.putString(HEIGHT_INPUT, String.valueOf(heightEditText.getText()));
         editor.putString(MASS_INPUT, String.valueOf(massEditText.getText()));
         editor.apply();
-    }
-
-    private boolean isSavedCheckBoxChecked() {
-        return restore;
     }
 
 

@@ -56,10 +56,10 @@
             android:layout_below="@+id/units_RadioGroup"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/input_lines_horizontal_margins"
-            android:ems="4"
+            android:ems="5"
             android:hint="@string/height_hint"
             android:inputType="numberDecimal"
-            android:maxLength="6"
+            android:maxLength="7"
             android:textAlignment="center" />
 
         <TextView
@@ -96,10 +96,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/height_label"
             android:layout_centerHorizontal="true"
-            android:ems="4"
+            android:ems="5"
             android:hint="@string/mass_hint"
             android:inputType="numberDecimal"
-            android:maxLength="6"
+            android:maxLength="7"
             android:textAlignment="center" />
 
         <TextView
