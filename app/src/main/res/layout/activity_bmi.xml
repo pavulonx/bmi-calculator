@@ -22,10 +22,10 @@
         <!-- radio buttons -->
 
         <RadioGroup
-            android:layout_below="@id/toolbar_bmi"
             android:id="@+id/units_RadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_bmi"
             android:layout_margin="5dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
@@ -61,24 +61,6 @@
             android:inputType="numberDecimal"
             android:maxLength="7"
             android:textAlignment="center" />
-
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:id="@+id/height_EditText"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/units_RadioGroup"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginBottom="@dimen/input_lines_horizontal_margins"-->
-            <!--android:textAlignment="center" >-->
-            <!--<EditText-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:ems="5"-->
-                <!--android:hint="@string/height_hint"-->
-                <!--android:inputType="numberDecimal"-->
-                <!--android:maxLength="7"-->
-                <!--/>-->
-        <!--</android.support.design.widget.TextInputLayout>-->
 
         <TextView
             android:id="@+id/height_label"

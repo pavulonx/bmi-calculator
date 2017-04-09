@@ -135,10 +135,10 @@
         Jakub Rozenbajger. Check it out! https://github.com/jakubrozenbajger</string>
     <string name="about_background_description">Great background</string>
     <string name="about_face_description">Real author face, really!</string>
-    <string name="app_version_about">Version:1.2</string>
+    <string name="app_version_about">Version:%1$s</string>
     <string name="about_author_info">Author: Jakub Rozenbajger</string>
     <string name="about_github_author">GitHub: jakubrozenbajger</string>
     <string name="github_site">http://github.com/jakubrozenbajger</string>
-    <string name="hello_face">No elo xD</string>
+    <string name="hello_face">Don\'t click on me!</string>
     <string name="share_error">Install a browser, please.</string>
 </resources>

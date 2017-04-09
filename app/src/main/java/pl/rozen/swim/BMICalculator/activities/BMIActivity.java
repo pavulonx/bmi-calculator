@@ -2,6 +2,7 @@ package pl.rozen.swim.BMICalculator.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.PersistableBundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -75,16 +76,18 @@ public class BMIActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bmi);
         ButterKnife.bind(this);
         restoreSavedInstanceState(savedInstanceState);
-        locale = getResources().getConfiguration().getLocales().get(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = getResources().getConfiguration().getLocales().get(0);
+        } else locale = new Locale("EN", "en");
+
         setSupportActionBar(toolbar);
-//        toolbar.inflateMenu(R.menu.menu_bmi);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_bmi, menu);
-        MenuItem share = menu.findItem(R.id.bmi_menu_item_share);
+        MenuItem share = menu.findItem(R.id.about_menu_item_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(share);
 
         shareIntent = new Intent(Intent.ACTION_SEND);
@@ -115,7 +118,7 @@ public class BMIActivity extends AppCompatActivity {
 
                 }
                 return true;
-            case R.id.bmi_menu_item_share:
+            case R.id.about_menu_item_share:
                 if (isResultVisible()) {
                     CharSequence description = generalDescriptionTextView.getText();
                     description = description.subSequence(8, description.length());
@@ -127,7 +130,7 @@ public class BMIActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.bmi_menu_item_about:
-                Intent startAbout = new Intent(this, AboutActivity.class); //TODO
+                Intent startAbout = new Intent(this, AboutActivity.class);
                 startActivity(startAbout);
                 return true;
             default:
@@ -304,12 +307,14 @@ public class BMIActivity extends AppCompatActivity {
             generalDescriptionTextView.setText(R.string.underweight_bmi_general_description);
             generalDescriptionTextView.setTextColor(getColor(R.color.underweightBMI));
             detailedDescriptionTextView.setText(R.string.underweight_bmi_detailed_description);
+
         } else if (18.5 <= result && result <= 25.0) {
             resultTextView.setText(format);
             resultTextView.setTextColor(getColor(R.color.normal_bmi));
             generalDescriptionTextView.setText(R.string.normal_bmi_general_description);
             generalDescriptionTextView.setTextColor(getColor(R.color.normal_bmi));
             detailedDescriptionTextView.setText(R.string.normal_bmi_detailed_description);
+
         } else if (25.0 < result && result < 30.0) {
             resultTextView.setText(format);
             resultTextView.setTextColor(getColor(R.color.overweightBMI));

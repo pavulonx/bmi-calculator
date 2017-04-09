@@ -30,7 +30,7 @@ public class CountBMIForMetrics implements ICountBMI {
             throw new IllegalArgumentException("Wrong mass of value: " + mass);
         if (!isValidHeight(height))
             throw new IllegalArgumentException("Wrong height of value: " + height);
-        else{
+        else {
             height /= CM_TO_M_RATIO;
             return mass / (height * height);
         }

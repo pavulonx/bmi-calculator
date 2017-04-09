@@ -34,7 +34,6 @@
             android:layout_marginTop="40dp"
             android:clickable="true"
             android:contentDescription="@string/about_face_description"
-            android:onClick="onFaceClick"
             android:src="@drawable/face" />
 
         <TextView
@@ -69,9 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/about_app_author"
             android:layout_margin="@dimen/medium_big_margin"
-            android:clickable="true"
             android:gravity="center"
-            android:onClick="onGitClick"
             android:text="@string/about_github_author"
             android:textSize="@dimen/medium_text_size" />
 
