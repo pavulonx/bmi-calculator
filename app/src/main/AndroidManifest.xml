@@ -22,12 +22,12 @@
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName=".activities.BMIActivity"
-            android:theme="@style/AppTheme" />
+/>
         <activity
             android:name=".activities.AboutScrollingActivity"
             android:label="@string/title_activity_about_scrolling"
             android:parentActivityName=".activities.BMIActivity"
-            android:theme="@style/AppTheme"/>
+/>
     </application>
 
 </manifest> <!-- android:configChanges="orientation|keyboardHidden" -->

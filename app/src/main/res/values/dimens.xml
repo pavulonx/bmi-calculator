@@ -13,4 +13,8 @@
     <dimen name="app_bar_height">280dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="medium_text_size">20sp</dimen>
+    <dimen name="medium_margin">15dp</dimen>
+    <dimen name="medium_big_margin">25dp</dimen>
+    <dimen name="big_text_size">30sp</dimen>
 </resources>

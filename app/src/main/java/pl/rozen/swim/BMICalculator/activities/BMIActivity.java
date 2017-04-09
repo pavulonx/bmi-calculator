@@ -127,7 +127,7 @@ public class BMIActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.bmi_menu_item_about:
-                Intent startAbout = new Intent(this, AboutScrollingActivity.class); //TODO
+                Intent startAbout = new Intent(this, AboutActivity.class); //TODO
                 startActivity(startAbout);
                 return true;
             default:
