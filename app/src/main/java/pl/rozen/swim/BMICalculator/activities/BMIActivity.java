@@ -23,11 +23,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForImperials;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForMetrics;
-import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
+import pl.rozen.swim.BMICalculator.interfaces.CountBMI;
 import pl.rozen.swim.BMICalculator.R;
 
 public class BMIActivity extends AppCompatActivity {
 
+    public static final String WRONG_TEXT_REPLACEMENT = "";
     @BindView(R.id.toolbar_bmi)
     Toolbar toolbar;
 
@@ -166,11 +167,13 @@ public class BMIActivity extends AppCompatActivity {
     private void restoreSavedInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             String savedResultBMI = savedInstanceState.getString(RESULT_BMI);
-            try {
-                float toDisplay = Float.parseFloat(savedResultBMI);
-                displayResultBMI(toDisplay);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (isValueGoodTyped()) {
+                try {
+                    float toDisplay = Float.parseFloat(savedResultBMI);
+                    displayResultBMI(toDisplay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             int checkedRadioButtonID = savedInstanceState.getInt(ACTIVE_RADIO_BUTTON, DEFAULT_WRONG_RB_ID);
             String heightInput = savedInstanceState.getString(HEIGHT_INPUT, null);
@@ -184,7 +187,6 @@ public class BMIActivity extends AppCompatActivity {
         super.onResume();
         restoreState();
     }
-
 
     @Override
     protected void onRestart() {
@@ -223,7 +225,6 @@ public class BMIActivity extends AppCompatActivity {
             massEditText.setText(massInput);
     }
 
-
     private void restoreState() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         boolean restore = preferences.getBoolean(PERSIST_STATE_FLAG, false);
@@ -245,13 +246,12 @@ public class BMIActivity extends AppCompatActivity {
         editor.apply();
     }
 
-
     @OnClick(R.id.calc_bmi_Button)
     public void onClickCalculateBMI(View view) {
         String heightS = heightEditText.getText().toString();
         String massS = massEditText.getText().toString();
 
-        ICountBMI bmiCalc;
+        CountBMI bmiCalc;
 
         if (isMetricUnitsChecked())
             bmiCalc = new CountBMIForMetrics();
@@ -295,7 +295,6 @@ public class BMIActivity extends AppCompatActivity {
             setResultInvisible();
         }
     }
-
 
     private void displayResultBMI(float result) {
 
@@ -369,13 +368,17 @@ public class BMIActivity extends AppCompatActivity {
 
     private void warnWrongMass() {
         massEditText.setError(getString(R.string.wrong_mass_err));
-        massEditText.setText("");
+        massEditText.setText(WRONG_TEXT_REPLACEMENT);
     }
 
     private void warnWrongHeight() {
         heightEditText.setError(getString(R.string.wrong_height_err));
-        heightEditText.setText("");
+        heightEditText.setText(WRONG_TEXT_REPLACEMENT);
 
+    }
+
+    private boolean isValueGoodTyped() {
+        return !(massEditText.getText().toString().equals(WRONG_TEXT_REPLACEMENT) || heightEditText.getText().toString().equals(WRONG_TEXT_REPLACEMENT));
     }
 
 }
