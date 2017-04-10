@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import pl.rozen.swim.BMICalculator.activities.BMIActivity;
-import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
+import pl.rozen.swim.BMICalculator.interfaces.CountBMI;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForImperials;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForMetrics;
 
@@ -57,8 +57,8 @@ public class MainActivityEspressoTest {
     @Test
     public void properWarningsDisplayed(){
         Random random = new Random();
-        ICountBMI metricBMI = new CountBMIForMetrics();
-        ICountBMI imperialBMI = new CountBMIForImperials();
+        CountBMI metricBMI = new CountBMIForMetrics();
+        CountBMI imperialBMI = new CountBMIForImperials();
         for (int i = 0; i < 10; i++) {
 
             if (i%2 == 0){ //metric option

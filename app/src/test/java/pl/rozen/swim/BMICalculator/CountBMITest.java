@@ -2,7 +2,7 @@ package pl.rozen.swim.BMICalculator;
 
 import org.junit.Test;
 
-import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
+import pl.rozen.swim.BMICalculator.interfaces.CountBMI;
 import pl.rozen.swim.BMICalculator.utils.CountBMIForMetrics;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class CountBMITest {
         float testMass = -1.0f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidMass(testMass);
@@ -36,7 +36,7 @@ public class CountBMITest {
         float testMass = 65f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidMass(testMass);
@@ -50,7 +50,7 @@ public class CountBMITest {
         float testMass = 0f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidMass(testMass);
@@ -64,7 +64,7 @@ public class CountBMITest {
         float testHeight = -1.0f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidHeight(testHeight);
@@ -78,7 +78,7 @@ public class CountBMITest {
         float testHeight = 165f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidHeight(testHeight);
@@ -92,7 +92,7 @@ public class CountBMITest {
         float testHeight = 0f;
 
         //WHEN
-        ICountBMI countBMI = new CountBMIForMetrics();
+        CountBMI countBMI = new CountBMIForMetrics();
 
         //THEN
         boolean actual = countBMI.isValidHeight(testHeight);

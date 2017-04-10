@@ -1,6 +1,6 @@
 package pl.rozen.swim.BMICalculator.interfaces;
 
-public interface ICountBMI {
+public interface CountBMI {
 
     boolean isValidMass(float mass);
 

@@ -1,12 +1,12 @@
 package pl.rozen.swim.BMICalculator.utils;
 
-import pl.rozen.swim.BMICalculator.interfaces.ICountBMI;
+import pl.rozen.swim.BMICalculator.interfaces.CountBMI;
 
 /**
  * Created by rozen on 20.03.17.
  */
 
-public class CountBMIForMetrics implements ICountBMI {
+public class CountBMIForMetrics implements CountBMI {
 
     private static final float MIN_MASS = 10.0f;
     private static final float MAX_MASS = 250.0f;
