@@ -374,7 +374,6 @@ public class BMIActivity extends AppCompatActivity {
     private void warnWrongHeight() {
         heightEditText.setError(getString(R.string.wrong_height_err));
         heightEditText.setText(WRONG_TEXT_REPLACEMENT);
-
     }
 
     private boolean isValueGoodTyped() {
